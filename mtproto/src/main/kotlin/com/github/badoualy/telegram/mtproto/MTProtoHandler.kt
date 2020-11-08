@@ -32,9 +32,6 @@ import java.util.concurrent.TimeoutException
 
 class MTProtoHandler {
 
-    private val ACK_BUFFER_SIZE = 15
-    private val ACK_BUFFER_TIMEOUT: Long = 150 * 1000
-
     private var connection: MTProtoConnection? = null
     var authKey: AuthKey? = null
         private set
@@ -265,8 +262,7 @@ class MTProtoHandler {
 
         if (startTimer) {
             try {
-                bufferTimeoutTask = MTProtoTimer.schedule(ACK_BUFFER_TIMEOUT,
-                                                          { onBufferTimeout(id) })
+                bufferTimeoutTask = MTProtoTimer.schedule(ACK_BUFFER_TIMEOUT) { onBufferTimeout(id) }
             } catch(e: IllegalStateException) {
                 // TODO: remove Timer use
                 // Timer already cancelled.
@@ -282,7 +278,7 @@ class MTProtoHandler {
 
     /** If buffer timed out, check that the relevant buffer wasn't already flushed, and if not, flush it */
     private fun onBufferTimeout(id: Int, flush: Boolean = true) {
-        if (!(connection?.isOpen() ?: false))
+        if (connection?.isOpen() != true)
             return
 
         var list: ArrayList<Long>? = null
@@ -421,7 +417,7 @@ class MTProtoHandler {
     }
 
     private fun onMessageReceived(bytes: ByteArray) {
-        var message: MTMessage = MTMessage()
+        var message = MTMessage()
         try {
             if (bytes.size == 4) {
                 onErrorReceived(RpcErrorException(StreamUtils.readInt(bytes), "INVALID_AUTH_KEY"))
@@ -644,6 +640,9 @@ class MTProtoHandler {
     }
 
     companion object {
+
+        private const val ACK_BUFFER_SIZE = 15
+        private const val ACK_BUFFER_TIMEOUT: Long = 150 * 1000
 
         private val logger = LoggerFactory.getLogger(MTProtoHandler::class.java)!!
 

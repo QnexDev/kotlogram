@@ -1,18 +1,18 @@
-apply plugin: 'java'
+apply plugin: 'java-library'
 apply plugin: 'maven'
 
-sourceCompatibility = '1.7'
-targetCompatibility = '1.7'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    api fileTree(include: ['*.jar'], dir: 'libs')
 
-    testCompile 'org.testng:testng:6.9.10'
-    testCompile 'org.reflections:reflections:0.9.10'
-    testCompile 'org.apache.commons:commons-lang3:3.4'
-    testCompile 'com.google.code.gson:gson:2.7'
-    testCompile 'commons-io:commons-io:2.5'
-    testCompile 'commons-codec:commons-codec:1.10'
+    testImplementation 'org.testng:testng:6.9.10'
+    testImplementation 'org.reflections:reflections:0.9.10'
+    testImplementation 'org.apache.commons:commons-lang3:3.4'
+    testImplementation 'com.google.code.gson:gson:2.7'
+    testImplementation 'commons-io:commons-io:2.5'
+    testImplementation 'commons-codec:commons-codec:1.10'
 }
 
 test {

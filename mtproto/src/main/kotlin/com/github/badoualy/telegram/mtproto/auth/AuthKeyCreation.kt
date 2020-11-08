@@ -65,7 +65,7 @@ object AuthKeyCreation {
 
     private fun createAuthKeyInternal(dataCenter: DataCenter, tmpKey: Boolean, tag: String): AuthResult? {
         val start = System.currentTimeMillis()
-        for (i in 0..AUTH_ATTEMPT_COUNT - 1) {
+        for (i in 0 until AUTH_ATTEMPT_COUNT) {
             try {
                 connection = MTProtoTcpConnection(dataCenter.ip, dataCenter.port, tag)
                 val authResult = createKey(tmpKey)

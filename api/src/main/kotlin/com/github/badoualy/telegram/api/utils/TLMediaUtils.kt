@@ -101,7 +101,7 @@ fun Collection<TLAbsPhotoSize>?.getMaxSize(): TLAbsPhotoSize? {
     if (this == null || isEmpty())
         return null
 
-    val maxSize = filterIsInstance<TLPhotoSize>().sortedByDescending { it.w * it.h }.firstOrNull()
+    val maxSize = filterIsInstance<TLPhotoSize>().maxBy { it.w * it.h }
     if (maxSize != null)
         return maxSize
 

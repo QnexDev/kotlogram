@@ -40,7 +40,7 @@ repositories {
 
 Then add the library dependency:
 ```gradle
-compile 'com.github.badoualy:kotlogram:1.0.0-RC3'
+api 'com.github.badoualy:kotlogram:1.0.0-RC3'
 ```
 
 Licence
