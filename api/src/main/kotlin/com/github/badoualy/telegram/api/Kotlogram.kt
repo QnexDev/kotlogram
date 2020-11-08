@@ -27,7 +27,7 @@ object Kotlogram {
     @JvmOverloads @JvmStatic
     fun getDefaultClient(application: TelegramApp, apiStorage: TelegramApiStorage,
                          updateCallback: UpdateCallback? = null,
-                         preferredDataCenter: DataCenter = PROD_DC4,
+                         preferredDataCenter: DataCenter = PROD_DC1,
                          tag: String = RandomUtils.randomInt().toString())
             : TelegramClient = DefaultTelegramClient(application, apiStorage, updateCallback, preferredDataCenter, tag)
 
@@ -41,7 +41,7 @@ object Kotlogram {
     }
 
     @JvmField val PROD_DC1 = DataCenter("149.154.175.50", 443)
-    @JvmField val PROD_DC2 = DataCenter("149.154.167.51", 443)
+    @JvmField val PROD_DC2 = DataCenter("149.154.167.50", 443)
     @JvmField val PROD_DC3 = DataCenter("149.154.175.100", 443)
     @JvmField val PROD_DC4 = DataCenter("149.154.167.91", 443) // 149.154.166.120
     @JvmField val PROD_DC5 = DataCenter("91.108.56.165", 443)

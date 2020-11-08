@@ -47,10 +47,10 @@ class TelegramClientPool private constructor(name: String) {
         }
 
         try {
-            timer.schedule(expiresIn, { onTimeout(id) })
+            timer.schedule(expiresIn) { onTimeout(id) }
         } catch (e: IllegalStateException) {
-            timer = Timer("${javaClass.simpleName}")
-            timer.schedule(expiresIn, { onTimeout(id) })
+            timer = Timer(javaClass.simpleName)
+            timer.schedule(expiresIn) { onTimeout(id) }
         }
     }
 
